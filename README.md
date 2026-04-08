@@ -1,5 +1,5 @@
 
-# Pipeline de Automatizacion - [Nombre de tu emprendimiento] 
+# Pipeline de Automatizacion - [S.I.P.U] 
  
 ## 1. Contexto organizacional 
     Que problema de negocio resuelve este pipeline? 
