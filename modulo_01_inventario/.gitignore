@@ -1,0 +1,28 @@
+# ── Entorno virtual ──
+venv/
+env/
+.venv/
+
+# ── Variables de entorno (NUNCA subir) ──
+.env
+
+# ── Python cache ──
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Archivos generados ──
+*.xlsx
+*.log
+/tmp/
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+
+# ── OS ──
+.DS_Store
+Thumbs.db
