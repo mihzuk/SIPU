@@ -101,6 +101,7 @@ SIPU usa datos de productos, inventario, precios y movimientos de ventas.
 
 ---
 
+
 ## 5. Como ejecutar 
 
 Instrucciones para correr el pipeline desde cero 
