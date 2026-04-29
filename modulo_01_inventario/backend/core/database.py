@@ -9,7 +9,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:josdav@localhost:5432/sipu-PROYECT",
+    "example://postgresql:name@http:8000/project",
 )
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
