@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIPU | Sistema de Inventario Productivo Universal</title>
+  <meta name="description" content="SIPU es una plataforma de inventario para PYMES que mejora el control de stock, alertas y reportes en tiempo real.">
+  <meta property="og:title" content="SIPU | Inventario inteligente para PYMES">
+  <meta property="og:description" content="Control de stock, alertas y reportes para negocios que quieren crecer con datos confiables.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#inicio" class="logo">
+        <div class="logo-mark">S</div>
+        <div class="logo-text">
+          <span>SIPU</span>
+          <span>Sistema de Inventario</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#equipo">Acerca</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#contacto">Solicitar info</a>
+        <a class="btn btn-primary" href="#demo">Ver demo</a>
+      </div>
+      <button class="menu-toggle" type="button">Menu</button>
+    </div>
+  </header>
+
+  <section id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">MVP activo | Modulo Inventario</div>
+        <h1 class="hero-title">Inventarios confiables para <span>decisiones seguras</span></h1>
+        <p class="hero-desc">SIPU ayuda a las PYMES a controlar stock, reducir errores y tomar decisiones con datos limpios. Todo en una plataforma clara, simple y lista para crecer.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto">Agendar demo</a>
+          <a class="btn btn-ghost" href="#producto">Ver funcionalidades</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="brand">
+          <img src="assets/brand-mark.svg" alt="Marca SIPU" width="84" height="84">
+          <div>
+            <h3>SIPU en accion</h3>
+            <p>Controla productos, stock y alertas en un solo panel.</p>
+          </div>
+        </div>
+        <div class="hero-metrics">
+          <div class="hero-metric"><strong>+32%</strong><span>menos errores</span></div>
+          <div class="hero-metric"><strong>24/7</strong><span>alertas activas</span></div>
+          <div class="hero-metric"><strong>1 min</strong><span>inventario actualizado</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="producto" class="section">
+    <div class="container">
+      <div class="section-tag">Producto</div>
+      <h2 class="section-title">Control total del inventario sin complicaciones</h2>
+      <p class="section-subtitle">SIPU transforma hojas de calculo en un sistema ordenado: registros limpios, alertas claras y reportes listos para decidir.</p>
+
+      <div class="product-grid">
+        <div class="feature-list">
+          <div class="feature-card">
+            <h4>Inventario y movimientos</h4>
+            <p>Registra entradas y salidas con validaciones basicas para evitar errores de stock.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Alertas inteligentes</h4>
+            <p>Detecta productos con stock bajo o sin rotacion con criterios configurables.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Reportes listos</h4>
+            <p>Genera informes simples de inventario, valorizacion y movimientos clave.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Datos limpios</h4>
+            <p>Normaliza nombres, precios y fechas para evitar decisiones incorrectas.</p>
+          </div>
+        </div>
+        <div class="mockup">
+          <h5>Panel de inventario</h5>
+          <div class="mockup-row"><span>Productos activos</span><strong>152</strong></div>
+          <div class="mockup-row"><span>Alertas pendientes</span><strong style="color:#EAB308;">8</strong></div>
+          <div class="mockup-row"><span>Valor total</span><strong>$128.5M</strong></div>
+          <div class="mockup-row"><span>Rotacion promedio</span><strong>19 dias</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="section alt">
+    <div class="container">
+      <div class="section-tag">Demo</div>
+      <h2 class="section-title">Explora el dashboard sin instalar nada</h2>
+      <p class="section-subtitle">Usa el demo para revisar como se ve el panel de control del modulo de inventario.</p>
+
+      <div class="demo-shell">
+        <div class="demo-top">
+          <h3>Dashboard SIPU</h3>
+          <a class="btn btn-ghost" href="dashboard.html" target="_blank" rel="noopener">Probar demo</a>
+        </div>
+        <div class="demo-panel active">
+          <div class="demo-cards">
+            <div class="demo-card"><strong>152</strong><span>Productos activos</span></div>
+            <div class="demo-card"><strong>8</strong><span>Alertas de stock</span></div>
+            <div class="demo-card"><strong>$128.5M</strong><span>Valor inventario</span></div>
+          </div>
+          <table class="demo-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoria</th>
+                <th>Stock</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arroz Diana 5kg</td>
+                <td>Alimentos</td>
+                <td>12</td>
+                <td><span class="status-pill status-low">Bajo</span></td>
+              </tr>
+              <tr>
+                <td>Cafe Premium 500g</td>
+                <td>Alimentos</td>
+                <td>48</td>
+                <td><span class="status-pill status-ok">Normal</span></td>
+              </tr>
+              <tr>
+                <td>Acetaminofen 500mg</td>
+                <td>Salud</td>
+                <td>0</td>
+                <td><span class="status-pill status-out">Agotado</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" class="section">
+    <div class="container">
+      <div class="section-tag">Acerca de nosotros</div>
+      <h2 class="section-title">Un equipo que entiende el inventario real</h2>
+      <p class="section-subtitle">SIPU nace para resolver el desorden que viven las PYMES con datos incompletos. Somos estudiantes de Tecnologia en Desarrollo de Software de la Universidad del Valle, sede Zarzal.</p>
+
+      <div class="about-grid">
+        <div>
+          <h3 class="section-title" style="font-size:32px;">Mision</h3>
+          <p class="section-subtitle">Crear un sistema de inventario simple, confiable y escalable que reduzca errores y mejore la rentabilidad de los negocios locales.</p>
+          <h3 class="section-title" style="font-size:28px;margin-top:24px;">Vision</h3>
+          <p class="section-subtitle">Ser la herramienta preferida para la gestion de inventarios en PYMES colombianas.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="avatar"><img src="avatares/jose.png" alt="Jose David Vergara Zapata"></div>
+            <div>
+              <strong>Jose David Vergara Zapata</strong>
+              <p class="section-subtitle">Estudiante | Desarrollo de Software</p>
+              <p class="section-subtitle"><a href="https://github.com/josdaver3000" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/jos%C3%A9-david-vergara-zapata-1aab00302" target="_blank" rel="noopener">LinkedIn</a></p>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="avatar"><img src="avatares/michael.avif" alt="Michael Stevens Calderon Ulloa"></div>
+            <div>
+              <strong>Michael Stevens Calderon Ulloa</strong>
+              <p class="section-subtitle">Estudiante | Desarrollo de Software</p>
+              <p class="section-subtitle"><a href="https://github.com/mihzuk" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/michael-calderon-995b05409/" target="_blank" rel="noopener">LinkedIn</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios" class="section alt">
+    <div class="container">
+      <div class="section-tag">Precios</div>
+      <h2 class="section-title">Planes pensados para cada etapa</h2>
+      <p class="section-subtitle">Modelo freemium y suscripcion mensual. Ajusta los valores segun el plan de negocio final.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h4>Basico</h4>
+          <p class="section-subtitle">Ideal para emprendimientos.</p>
+          <div class="price">$0 <small>/mes</small></div>
+          <ul class="price-list">
+            <li>Hasta 50 productos</li>
+            <li>Alertas basicas</li>
+            <li>Reportes simples</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contacto">Comenzar</a>
+        </div>
+        <div class="price-card highlight">
+          <h4>Pro</h4>
+          <p class="section-subtitle">Negocios en crecimiento.</p>
+          <div class="price">$49.000 <small>/mes</small></div>
+          <ul class="price-list">
+            <li>Productos ilimitados</li>
+            <li>Alertas avanzadas</li>
+            <li>Exportacion Excel</li>
+            <li>Soporte prioritario</li>
+          </ul>
+          <a class="btn btn-primary" href="#contacto">Elegir Pro</a>
+        </div>
+        <div class="price-card">
+          <h4>Empresa</h4>
+          <p class="section-subtitle">Cadenas o bodegas grandes.</p>
+          <div class="price">Personalizado</div>
+          <ul class="price-list">
+            <li>Implementacion guiada</li>
+            <li>Entrenamiento del equipo</li>
+            <li>Integraciones especiales</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contacto">Hablar con ventas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section">
+    <div class="container">
+      <div class="section-tag">Contacto</div>
+      <h2 class="section-title">Hablemos de tu inventario</h2>
+      <p class="section-subtitle">Completa el formulario y te respondemos con una demo personalizada. No enviamos datos reales.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Canales directos</h3>
+          <p>Resolvemos dudas por correo o redes sociales.</p>
+          <ul class="contact-list">
+            <li>Correo: <a href="mailto:contacto@sipu.co">contacto@sipu.co</a></li>
+            <li>Telefono: <a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li>LinkedIn (equipo): <a href="https://www.linkedin.com/in/jos%C3%A9-david-vergara-zapata-1aab00302" target="_blank" rel="noopener">Jose David Vergara</a></li>
+            <li>LinkedIn (equipo): <a href="https://www.linkedin.com/in/michael-calderon-995b05409/" target="_blank" rel="noopener">Michael Calderon</a></li>
+          </ul>
+        </div>
+        <form class="form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">Nombre completo</label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Tu nombre">
+              <div class="form-help"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Correo</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="correo@negocio.com">
+              <div class="form-help"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="company">Negocio</label>
+            <input class="form-input" type="text" id="company" name="company" placeholder="Nombre del negocio">
+            <div class="form-help"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Mensaje</label>
+            <textarea class="form-input" id="message" name="message" rows="4" placeholder="Describe tu necesidad"></textarea>
+            <div class="form-help"></div>
+          </div>
+          <div class="form-actions">
+            <span class="form-note">Validacion en JavaScript. Sin envio real.</span>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>SIPU</strong>
+        <div><small>Sistema de Inventario Productivo Universal</small></div>
+        <div><small>Zarzal, Valle del Cauca, Colombia</small></div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

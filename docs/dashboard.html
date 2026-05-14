@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo SIPU | Dashboard Inventario</title>
+  <meta name="description" content="Demo funcional del dashboard de inventario SIPU.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js" defer></script>
+</head>
+<body>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div id="app">
+    <div class="app-layout">
+      <nav class="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-icon">S</div>
+          <div>
+            <div class="logo-text">SIPU</div>
+            <div class="logo-sub">Sistema de Inventario</div>
+          </div>
+        </div>
+        <div class="sidebar-nav">
+          <div class="nav-label">Principal</div>
+          <div class="nav-item active" onclick="showPage('dashboard', this)"><span class="ni">📊</span> Dashboard</div>
+          <div class="nav-item" onclick="showPage('inventario', this)"><span class="ni">📦</span> Inventario</div>
+          <div class="nav-item" onclick="showPage('productos', this)"><span class="ni">🛍️</span> Productos</div>
+          <div class="nav-item" onclick="showPage('ordenes', this)"><span class="ni">📋</span> Ordenes</div>
+          <div class="nav-label">Analisis</div>
+          <div class="nav-item" onclick="showPage('reportes', this)"><span class="ni">📈</span> Reportes</div>
+          <div class="nav-label">Sistema</div>
+          <div class="nav-item" onclick="showPage('usuarios', this)"><span class="ni">👥</span> Usuarios</div>
+          <div class="nav-item" onclick="showPage('config', this)"><span class="ni">⚙️</span> Configuracion</div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="sidebar-secure">✅ Demo local — datos en memoria</div>
+          <a class="btn-logout" href="index.html">↩ Volver al sitio</a>
+        </div>
+      </nav>
+
+      <div class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h1 id="pageTitle">Dashboard Principal</h1>
+            <p id="pageSubtitle">Bienvenido al Sistema de Inventario Productivo Universal</p>
+          </div>
+          <div class="topbar-right">
+            <div class="search-bar">
+              <span>🔍</span>
+              <input type="text" placeholder="Buscar productos..." oninput="handleSearch(this.value)">
+            </div>
+            <div class="notif-btn" onclick="showToast('5 alertas pendientes de revision', 'info')">
+              🔔
+              <div class="notif-badge">5</div>
+            </div>
+            <div class="user-chip">
+              <div class="user-avatar">A</div>
+              <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">Administrador</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page active" id="page-dashboard">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-top"><div class="kpi-icon">📦</div><div class="kpi-badge up">+12%</div></div>
+              <div class="kpi-value" id="kpi-productos">2,847</div>
+              <div class="kpi-label">Total Productos</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-top"><div class="kpi-icon">⚠️</div><div class="kpi-badge down">-5%</div></div>
+              <div class="kpi-value" id="kpi-bajo">23</div>
+              <div class="kpi-label">Stock Bajo</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-top"><div class="kpi-icon">📈</div><div class="kpi-badge up">+8%</div></div>
+              <div class="kpi-value">156</div>
+              <div class="kpi-label">Movimientos Hoy</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-top"><div class="kpi-icon">💰</div><div class="kpi-badge up">+15%</div></div>
+              <div class="kpi-value">$487,392</div>
+              <div class="kpi-label">Valor Inventario</div>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <button class="qa-btn primary" onclick="openModal('modalProducto')">📦 Nuevo Producto</button>
+            <button class="qa-btn" onclick="openModal('modalMovimiento')">📋 Registrar Movimiento</button>
+            <button class="qa-btn" onclick="showPage('reportes', document.querySelector('[onclick*=reportes]'))">📄 Generar Reporte</button>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Movimientos Recientes</div>
+                <span style="font-size:12px;color:var(--gray-500);">Ultimas 3 horas</span>
+              </div>
+              <div class="card-body">
+                <div class="mov-list" id="movList">
+                  <div class="mov-item">
+                    <div class="mov-dot in"></div>
+                    <div class="mov-info"><div class="mov-name">Laptop Dell XPS 15</div><div class="mov-time">Hace 15 min</div></div>
+                    <div class="mov-qty in">+5</div>
+                  </div>
+                  <div class="mov-item">
+                    <div class="mov-dot out"></div>
+                    <div class="mov-info"><div class="mov-name">Monitor Samsung 27\"</div><div class="mov-time">Hace 1 hora</div></div>
+                    <div class="mov-qty out">-2</div>
+                  </div>
+                  <div class="mov-item">
+                    <div class="mov-dot in"></div>
+                    <div class="mov-info"><div class="mov-name">Mouse Logitech MX</div><div class="mov-time">Hace 2 horas</div></div>
+                    <div class="mov-qty in">+10</div>
+                  </div>
+                  <div class="mov-item">
+                    <div class="mov-dot out"></div>
+                    <div class="mov-info"><div class="mov-name">Teclado Mecanico</div><div class="mov-time">Hace 3 horas</div></div>
+                    <div class="mov-qty out">-3</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Alertas del Sistema</div>
+                <span style="font-size:11px;color:var(--red);font-weight:600;">4 activas</span>
+              </div>
+              <div class="card-body">
+                <div class="alert-list">
+                  <div class="alert-item">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-text">23 productos con stock bajo</div>
+                    <button class="alert-btn" onclick="showPage('inventario', document.querySelector('[onclick*=inventario]'));showToast('Mostrando productos con stock bajo', 'info')">Revisar</button>
+                  </div>
+                  <div class="alert-item">
+                    <div class="alert-icon">🔵</div>
+                    <div class="alert-text">Actualizacion disponible v2.4.1</div>
+                    <button class="alert-btn ghost" onclick="showToast('Actualizando sistema...', 'info')">Ver</button>
+                  </div>
+                  <div class="alert-item">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-text">5 ordenes pendientes de procesar</div>
+                    <button class="alert-btn" onclick="showPage('ordenes', document.querySelector('[onclick*=ordenes]'))">Procesar</button>
+                  </div>
+                  <div class="alert-item">
+                    <div class="alert-icon">✅</div>
+                    <div class="alert-text">Backup completado correctamente</div>
+                    <button class="alert-btn ghost">Detalles</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Movimientos esta semana</div>
+              <span style="font-size:12px;color:var(--gray-500);">Entradas vs Salidas</span>
+            </div>
+            <div class="card-body">
+              <div class="chart-bars" id="chartBars">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:60%;" title="Lun: 45 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:80%;" title="Mar: 65 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:55%;" title="Mie: 42 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar active" style="height:90%;" title="Jue: 72 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:70%;" title="Vie: 56 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:40%;" title="Sab: 30 mov"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px"><div class="bar" style="height:25%;" title="Dom: 20 mov"></div></div>
+              </div>
+              <div class="bar-labels">
+                <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page" id="page-inventario">
+          <div class="page-title-bar">
+            <h2>Inventario</h2>
+            <button class="btn-primary" onclick="openModal('modalProducto')">+ Nuevo Producto</button>
+          </div>
+          <div class="card">
+            <div class="table-toolbar">
+              <div class="filter-chips">
+                <div class="chip active" onclick="filterTable('all', this)">Todos</div>
+                <div class="chip" onclick="filterTable('ok', this)">Stock OK</div>
+                <div class="chip" onclick="filterTable('low', this)">Stock Bajo</div>
+                <div class="chip" onclick="filterTable('out', this)">Agotado</div>
+              </div>
+              <div class="search-bar" style="width:180px;">
+                <span>🔍</span>
+                <input type="text" placeholder="Buscar..." oninput="searchTable(this.value)">
+              </div>
+            </div>
+            <table id="inventarioTable">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Categoria</th>
+                  <th>Stock</th>
+                  <th>Min.</th>
+                  <th>Precio</th>
+                  <th>Valor Total</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="inventarioBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="page" id="page-productos">
+          <div class="page-title-bar">
+            <h2>Productos</h2>
+            <button class="btn-primary" onclick="openModal('modalProducto')">+ Agregar Producto</button>
+          </div>
+          <div class="card" style="overflow:hidden;">
+            <div class="products-grid" id="productsGrid"></div>
+          </div>
+        </div>
+
+        <div class="page" id="page-ordenes">
+          <div class="page-title-bar">
+            <h2>Ordenes</h2>
+            <button class="btn-primary" onclick="openModal('modalMovimiento')">+ Nueva Orden</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>N° Orden</th>
+                  <th>Producto</th>
+                  <th>Tipo</th>
+                  <th>Cantidad</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="ordenesBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="page" id="page-reportes">
+          <div class="page-title-bar">
+            <h2>Reportes</h2>
+          </div>
+          <div class="reports-grid" style="margin-bottom:24px;">
+            <div class="report-card" onclick="showToast('Generando reporte de inventario...', 'info')">
+              <div class="report-icon">📦</div>
+              <div class="report-info">
+                <h3>Reporte de Inventario</h3>
+                <p>Estado actual de todos los productos y stock disponible</p>
+              </div>
+            </div>
+            <div class="report-card" onclick="showToast('Generando reporte de movimientos...', 'info')">
+              <div class="report-icon">📈</div>
+              <div class="report-info">
+                <h3>Movimientos del Periodo</h3>
+                <p>Entradas y salidas de mercancia en el periodo seleccionado</p>
+              </div>
+            </div>
+            <div class="report-card" onclick="showToast('Generando reporte de valorizacion...', 'info')">
+              <div class="report-icon">💰</div>
+              <div class="report-info">
+                <h3>Valorizacion de Inventario</h3>
+                <p>Valor monetario total del inventario actual</p>
+              </div>
+            </div>
+            <div class="report-card" onclick="showToast('Generando reporte de predicciones IA...', 'info')">
+              <div class="report-icon">🤖</div>
+              <div class="report-info">
+                <h3>Predicciones IA</h3>
+                <p>Analisis predictivo de demanda basado en patrones historicos</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Resumen del Mes</div></div>
+            <div class="card-body">
+              <div class="chart-bars" style="height:120px;">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;"><div class="bar" style="height:70%;width:100%;"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;"><div class="bar active" style="height:95%;width:100%;"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;"><div class="bar" style="height:60%;width:100%;"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;"><div class="bar" style="height:85%;width:100%;"></div></div>
+              </div>
+              <div class="bar-labels"><span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page" id="page-usuarios">
+          <div class="page-title-bar">
+            <h2>Usuarios</h2>
+            <button class="btn-primary" onclick="showToast('Funcionalidad disponible en plan Pro', 'info')">+ Invitar Usuario</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Ultimo acceso</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:8px;"><div class="user-avatar" style="width:30px;height:30px;font-size:12px;">A</div><span>Admin SIPU</span></div></td>
+                  <td>admin@sipu.co</td>
+                  <td><span class="stock-badge stock-ok">Administrador</span></td>
+                  <td>Ahora</td>
+                  <td><span class="stock-badge stock-ok">● Activo</span></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:8px;"><div class="user-avatar" style="width:30px;height:30px;font-size:12px;background:var(--blue);">M</div><span>Maria Lopez</span></div></td>
+                  <td>maria@negocio.co</td>
+                  <td><span class="stock-badge stock-low">Operario</span></td>
+                  <td>Hace 2 horas</td>
+                  <td><span class="stock-badge stock-ok">● Activo</span></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:8px;"><div class="user-avatar" style="width:30px;height:30px;font-size:12px;background:var(--gray-500);">J</div><span>Juan Garcia</span></div></td>
+                  <td>juan@negocio.co</td>
+                  <td><span class="stock-badge stock-low">Operario</span></td>
+                  <td>Ayer</td>
+                  <td><span class="stock-badge stock-out">● Inactivo</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="page" id="page-config">
+          <div class="page-title-bar">
+            <h2>Configuracion</h2>
+            <button class="btn-primary" onclick="showToast('Configuracion guardada ✓', 'success')">Guardar Cambios</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="card">
+              <div class="card-header"><div class="card-title">Empresa</div></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Nombre del negocio</label>
+                  <input class="form-input" value="Mi Negocio SIPU">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tipo de negocio</label>
+                  <select class="form-input">
+                    <option>Tienda minorista</option>
+                    <option>Restaurante</option>
+                    <option>Farmacia</option>
+                    <option>Bodega</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Ciudad</label>
+                  <input class="form-input" value="Zarzal, Valle del Cauca">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Alertas</div></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Stock minimo por defecto</label>
+                  <input class="form-input" type="number" value="10">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Dias sin movimiento para alerta</label>
+                  <input class="form-input" type="number" value="30">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Correo de notificaciones</label>
+                  <input class="form-input" type="email" value="admin@sipu.co">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalProducto">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Nuevo Producto</div>
+        <button class="modal-close" onclick="closeModal('modalProducto')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombre del producto *</label>
+            <input class="form-input" id="pNombre" placeholder="Ej: Laptop Dell XPS 15">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria *</label>
+            <select class="form-input" id="pCategoria">
+              <option value="">Seleccionar...</option>
+              <option>Electronica</option>
+              <option>Alimentos</option>
+              <option>Ropa</option>
+              <option>Medicamentos</option>
+              <option>Herramientas</option>
+              <option>Otros</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Stock inicial</label>
+            <input class="form-input" id="pStock" type="number" placeholder="0" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock minimo</label>
+            <input class="form-input" id="pStockMin" type="number" placeholder="10" min="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Precio unitario ($)</label>
+            <input class="form-input" id="pPrecio" type="number" placeholder="0.00" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unidad</label>
+            <select class="form-input" id="pUnidad">
+              <option>Unidad</option>
+              <option>Kg</option>
+              <option>Litro</option>
+              <option>Caja</option>
+              <option>Pack</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('modalProducto')">Cancelar</button>
+        <button class="btn-primary" onclick="guardarProducto()">Guardar Producto</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalMovimiento">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Registrar Movimiento</div>
+        <button class="modal-close" onclick="closeModal('modalMovimiento')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Tipo de movimiento</label>
+          <select class="form-input" id="mTipo">
+            <option value="entrada">Entrada (Compra / Recepcion)</option>
+            <option value="salida">Salida (Venta / Uso)</option>
+            <option value="ajuste">Ajuste de inventario</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Producto *</label>
+          <select class="form-input" id="mProducto">
+            <option value="">Seleccionar...</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Cantidad *</label>
+            <input class="form-input" id="mCantidad" type="number" placeholder="0" min="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fecha</label>
+            <input class="form-input" id="mFecha" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nota (opcional)</label>
+          <input class="form-input" id="mNota" placeholder="Descripcion del movimiento...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('modalMovimiento')">Cancelar</button>
+        <button class="btn-primary" onclick="registrarMovimiento()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
